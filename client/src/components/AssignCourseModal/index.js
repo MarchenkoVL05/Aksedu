@@ -13,8 +13,6 @@ function AssignCourseModal({ setOpenAssignModal, courseId }) {
   const status = useSelector((state) => state.assignment.status);
   const error = useSelector((state) => state.course.error);
 
-  console.log(assignments);
-
   useEffect(() => {
     dispatch(fetchAssignments());
   }, []);

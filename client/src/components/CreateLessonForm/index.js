@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { createLesson } from "../../redux/slices/lessonSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileLines } from "@fortawesome/free-solid-svg-icons";
 import styles from "./CreateLessonForm.module.scss";
 
 function CreateLessonForm({ closeModal }) {
@@ -24,9 +26,13 @@ function CreateLessonForm({ closeModal }) {
   return (
     <>
       <div onClick={() => closeModal(false)} className={styles.overlay}></div>
-      <div className={styles.wrapper}>
-        <h1 className={styles.title}>Новый урок</h1>
-        <form onSubmit={handleSubmit(handleCreateLesson)} className={styles.form}>
+      <form onSubmit={handleSubmit(handleCreateLesson)} className={styles.form}>
+        <div className={styles.title}>
+          <FontAwesomeIcon icon={faFileLines} />
+          Новый урок
+        </div>
+        <label>
+          Название
           <input
             {...register("title", { required: true })}
             className={styles.input}
@@ -36,6 +42,9 @@ function CreateLessonForm({ closeModal }) {
             required
             placeholder="Название урока"
           />
+        </label>
+        <label>
+          Описание
           <textarea
             {...register("content", { required: true })}
             minLength={10}
@@ -45,10 +54,10 @@ function CreateLessonForm({ closeModal }) {
             required
             placeholder="Описание"
           />
-          <input {...register("videoUrl", { required: true })} type="file" required />
-          <button className={styles.button}>Сохранить урок</button>
-        </form>
-      </div>
+        </label>
+        <input {...register("videoUrl", { required: true })} type="file" required />
+        <button className={styles.button}>Сохранить урок</button>
+      </form>
     </>
   );
 }

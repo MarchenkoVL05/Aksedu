@@ -9,70 +9,88 @@
   z-index: 2;
 }
 
-.wrapper {
+.form {
+  min-width: 580px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
   position: fixed;
+  padding: 80px 30px 50px;
   z-index: 3;
   background-color: white;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 30px;
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-  padding: 30px 30px;
-  box-shadow: #64646f33 0px 7px 29px 0px;
-  border-radius: 30px;
+  border-radius: 20px;
+  background: #ffffff;
+  background: linear-gradient(174deg, #ffffff 0%, #f7f7f7 100%);
+  box-shadow: #00000066 0px 2px 4px, #0000004d 0px 7px 13px -3px, #00000033 0px -3px 0px inset;
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 23px;
+    font-weight: 400;
+    font-family: "Open Sans";
+  }
 }
 
 .title {
-  font-family: "Open Sans";
-  font-size: 38px;
-  text-align: center;
-}
-
-.form {
   display: flex;
-  flex-direction: column;
+  gap: 10px;
   align-items: center;
-  gap: 25px;
+  justify-content: flex-end;
+  padding: 15px 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #3b4d61;
+  border-radius: 20px 20px 0 0;
+  font-family: "Open Sans";
+  font-size: 22px;
+  font-weight: 300;
+  color: #ffffff;
+  text-align: right;
 }
 
 .input {
-  width: 100%;
-  height: 50px;
   border: 1px solid #d8d8d8;
-  padding: 10px;
+  padding: 5px 10px;
+  height: 45px;
+  border-radius: 3px;
+  font-size: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   &:focus {
     outline: none;
   }
 }
 
 .textarea {
-  width: 100%;
-  max-width: 560px;
-  height: 300px;
-  border: 1px solid #d8d8d8;
-  padding: 10px;
+  padding: 10px 10px;
+  min-height: 200px;
+  max-width: 100%;
+  border: 1px solid #c4c4c4;
+  border-radius: 3px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  font-size: 20px;
   &:focus {
     outline: none;
   }
 }
 
 .button {
-  width: 420px;
-  height: 50px;
-  padding: 5px 15px;
-  font-size: 22px;
-  background-color: #3b4d61;
-  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 20px;
   color: white;
   border: none;
+  background-color: #e2be2a;
+  border-radius: 5px;
   box-shadow: #32325d40 0px 13px 27px -5px, #0000004d 0px 8px 16px -8px;
   cursor: pointer;
+  transition: 0.2s all;
   &:hover {
-    background-color: #e2be2a;
+    background-color: #3b4d61;
+    color: white;
   }
 }
