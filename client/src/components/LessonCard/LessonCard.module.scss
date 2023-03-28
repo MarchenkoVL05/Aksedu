@@ -1,0 +1,33 @@
+.card {
+  position: relative;
+  width: 100%;
+  height: min-content;
+  padding: 20px 30px;
+  box-shadow: #0000003d 0px 3px 8px;
+  border-radius: 10px;
+  justify-self: center;
+}
+
+.title {
+  font-family: "Open Sans";
+  font-size: 28px;
+  font-weight: 600;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 15px;
+  transition: 0.2s all;
+  &:hover {
+    color: #dbbf0b;
+    cursor: pointer;
+  }
+}
+
+.content {
+  margin-top: 15px;
+  font-size: 22px;
+  color: #585858;
+}
+
+.date {
+  margin-top: 15px;
+  color: #797979;
+}

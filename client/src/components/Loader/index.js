@@ -1,0 +1,21 @@
+import { Puff } from "react-loader-spinner";
+import styles from "./Loader.module.scss";
+
+function Loader() {
+  return (
+    <div className={styles.container}>
+      <Puff
+        height="80"
+        width="80"
+        radius={1}
+        color="#3b4d61"
+        ariaLabel="puff-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+      />
+    </div>
+  );
+}
+
+export default Loader;
