@@ -14,15 +14,15 @@ function RegisterForm() {
     formState: { errors },
   } = useForm();
 
-  useEffect(() => {
-    dispatch(fetchAllDepartments());
-  }, []);
-
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.auth);
   const registerError = useSelector((state) => state.auth.error);
   const departments = useSelector((state) => state.department.departments);
   const status = useSelector((state) => state.department.status);
+
+  useEffect(() => {
+    dispatch(fetchAllDepartments());
+  }, []);
 
   const handleRegisterForm = (data) => {
     dispatch(registerUser(data));

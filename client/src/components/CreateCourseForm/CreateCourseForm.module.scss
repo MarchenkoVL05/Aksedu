@@ -1,0 +1,72 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.form {
+  min-width: 580px;
+  max-height: 720px;
+  overflow-y: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: #00000066 0px 2px 4px, #0000004d 0px 7px 13px -3px, #00000033 0px -3px 0px inset;
+  label {
+    font-family: "Open Sans";
+    font-size: 23px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  input {
+    font-size: 22px;
+    height: 45px;
+    padding: 5px 10px;
+    border: 1px solid #d5d5d5;
+    border-radius: 5px;
+    box-shadow: #3c40434d 0px 1px 2px 0px, #3c404326 0px 2px 6px 2px;
+    &:focus {
+      outline: none;
+    }
+  }
+  select {
+    padding: 10px 5px;
+    border-radius: 3px;
+    border: 1px solid #d5d5d5;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+  }
+  button {
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 20px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3ec6ef;
+    box-shadow: #32325d40 0px 13px 27px -5px, #0000004d 0px 8px 16px -8px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s all;
+    &:hover {
+      background-color: #e7ce0c;
+    }
+  }
+}
