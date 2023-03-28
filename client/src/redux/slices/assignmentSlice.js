@@ -66,46 +66,44 @@ const assignmentSlice = createSlice({
       .addCase(fetchAssignments.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.error;
+      })
+      // Назначить курс
+      .addCase(assignCourse.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(assignCourse.fulfilled, (state, action) => {
+        const newAssignment = action.payload;
+        state.assigmnents = state.assigmnents.map((assignment) => {
+          if (assignment._id === newAssignment._id) {
+            return newAssignment;
+          }
+          return assignment;
+        });
+        state.status = "resolved";
+      })
+      .addCase(assignCourse.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.error;
+      })
+      // Снять с назначения курс
+      .addCase(deAssignCourse.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(deAssignCourse.fulfilled, (state, action) => {
+        const newAssignment = action.payload;
+        state.assigmnents = state.assigmnents.map((assignment) => {
+          if (assignment._id === newAssignment._id) {
+            return newAssignment;
+          }
+          return assignment;
+        });
+        state.status = "resolved";
+      })
+      .addCase(deAssignCourse.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.error;
       });
-    // Назначить курс
-    builder.addCase(assignCourse.pending, (state) => {
-      state.status = "loading";
-    });
-    builder.addCase(assignCourse.fulfilled, (state, action) => {
-      const newAssignment = action.payload;
-      state.assigmnents = state.assigmnents.map((assignment) => {
-        if (assignment._id === newAssignment._id) {
-          return newAssignment;
-        }
-        return assignment;
-      });
-      state.status = "resolved";
-    });
-
-    builder.addCase(assignCourse.rejected, (state, action) => {
-      state.status = "rejected";
-      state.error = action.error;
-    });
-    // Снять с назначения курс
-    builder.addCase(deAssignCourse.pending, (state) => {
-      state.status = "loading";
-      state.error = null;
-    });
-    builder.addCase(deAssignCourse.fulfilled, (state, action) => {
-      const newAssignment = action.payload;
-      state.assigmnents = state.assigmnents.map((assignment) => {
-        if (assignment._id === newAssignment._id) {
-          return newAssignment;
-        }
-        return assignment;
-      });
-      state.status = "resolved";
-    });
-
-    builder.addCase(deAssignCourse.rejected, (state, action) => {
-      state.status = "rejected";
-      state.error = action.error;
-    });
   },
 });
 

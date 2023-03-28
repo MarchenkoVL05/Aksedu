@@ -149,6 +149,7 @@ class userController {
     }
   }
 
+  // Возможно нужно перенести в отдельный assignmentController
   static async getAllWithAssignments(req, res) {
     try {
       const users = await AssignmentModel.find().populate("userId");
