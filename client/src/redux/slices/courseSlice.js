@@ -16,6 +16,21 @@ export const fetchAllCourses = createAsyncThunk("course/fetchAllCourses", async 
   }
 });
 
+export const fetchOneCourse = createAsyncThunk("course/fetchOneCourse", async (params) => {
+  try {
+    const response = await axios.get(`/course/${params}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const customError = error.response ? error.response.data.message : "Network Error";
+    throw customError;
+  }
+});
+
 export const deleteCourse = createAsyncThunk("course/deleteCourse", async (id) => {
   try {
     const response = await axios.delete("/course/delete", {
@@ -53,9 +68,10 @@ const courseSlice = createSlice({
   name: "course",
   initialState: {
     courses: [],
-    currentCourse: {},
     error: null,
     status: null,
+    currentCourse: {},
+    currentCourseStatus: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -70,6 +86,18 @@ const courseSlice = createSlice({
     builder.addCase(fetchAllCourses.rejected, (state, action) => {
       state.status = "rejected";
       state.error = action.error;
+    });
+    // Загрузить один курс
+    builder.addCase(fetchOneCourse.pending, (state) => {
+      state.currentCourseStatus = "loading";
+    });
+    builder.addCase(fetchOneCourse.fulfilled, (state, action) => {
+      state.currentCourse = action.payload;
+      state.currentCourseStatus = "resolved";
+    });
+    builder.addCase(fetchOneCourse.rejected, (state, action) => {
+      state.status = "rejected";
+      state.currentCourseStatus = action.error;
     });
     // Удалить курс
     builder.addCase(deleteCourse.pending, (state) => {

@@ -149,6 +149,19 @@ class userController {
     }
   }
 
+  static async getAllWithAssignments(req, res) {
+    try {
+      const users = await AssignmentModel.find().populate("userId");
+
+      return res.json(users);
+    } catch (error) {
+      console.log(error);
+      res.json({
+        message: "Не удалось загрузить список пользователей",
+      });
+    }
+  }
+
   static async delete(req, res) {
     try {
       const userId = req.body.id;

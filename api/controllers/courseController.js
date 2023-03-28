@@ -30,7 +30,7 @@ class courseController {
     try {
       const courseId = req.params.id;
 
-      const course = await CourseModel.findOne({ _id: courseId });
+      const course = await CourseModel.findOne({ _id: courseId }).populate("lessons");
 
       if (!course) {
         return res.json({
@@ -60,8 +60,9 @@ class courseController {
       });
 
       const newCourse = await doc.save();
+      const populatedCourse = await CourseModel.findById(newCourse._id).populate("department");
 
-      return res.json(newCourse);
+      return res.json(populatedCourse);
     } catch (error) {
       console.log(error);
       res.json({
@@ -120,7 +121,8 @@ class courseController {
           }
         );
 
-        return res.json(assignment);
+        const populatedAssignment = await AssignmentModel.findById(assignment._id).populate("userId");
+        return res.json(populatedAssignment);
       }
     } catch (error) {
       console.log(error);
@@ -148,7 +150,8 @@ class courseController {
         }
       );
 
-      return res.json(assignment);
+      const populatedAssignment = await AssignmentModel.findById(assignment._id).populate("userId");
+      return res.json(populatedAssignment);
     } catch (error) {
       console.log(error);
       res.json({

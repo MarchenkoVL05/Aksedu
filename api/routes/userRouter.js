@@ -8,6 +8,7 @@ const router = new Router();
 // GET
 router.get("/all", checkAuth, checkRole, userController.getAll);
 router.get("/me", userController.authMe);
+router.get("/AllWithAssignments", checkAuth, checkRole, userController.getAllWithAssignments);
 // POST
 router.post("/register", userController.register);
 router.post("/login", userController.login);

@@ -125,6 +125,7 @@ const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.status = "resolved";
         state.users = action.payload;
       })
       .addCase(fetchUsers.rejected, (state, action) => {

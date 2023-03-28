@@ -44,6 +44,7 @@ function CreateCourseForm({ setCreateCourseModal }) {
     };
 
     dispatch(createCourse(newCourse));
+    setCreateCourseModal(false);
   };
 
   const handleLessonSelect = (e, index) => {
@@ -68,9 +69,13 @@ function CreateCourseForm({ setCreateCourseModal }) {
         {errors?.title && <span>{errors.title.message}</span>}
         <label>
           Отдел
-          <select {...register("department", { required: true })} required>
+          <select
+            {...register("department", { required: true })}
+            defaultValue={departmentsStatus === "resolved" && departments[0]._id}
+            required
+          >
             {departmentsStatus === "loading" ? (
-              <option>Загрузка...</option>
+              <option value="">Загрузка...</option>
             ) : (
               departments.map((department) => {
                 return (
@@ -91,7 +96,7 @@ function CreateCourseForm({ setCreateCourseModal }) {
               defaultValue={lessonsStatus === "resolved" && index === 0 ? lessons[0]?._id : ""}
               required
             >
-              {lessonsStatus === "loading" && <option>Загрузка...</option>}
+              {lessonsStatus === "loading" && <option value="">Загрузка...</option>}
               {lessons.map((lesson, lessonIndex) => {
                 return (
                   <option value={lesson._id} key={lesson._id}>
