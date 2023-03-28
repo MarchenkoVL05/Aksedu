@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { fetchAllDepartments } from "../../redux/slices/departmentSlice";
 import { fetchAllLessons } from "../../redux/slices/lessonSlice";
+import { createCourse } from "../../redux/slices/courseSlice";
 import styles from "./CreateCourseForm.module.scss";
 
 function CreateCourseForm({ setCreateCourseModal }) {
@@ -42,7 +43,7 @@ function CreateCourseForm({ setCreateCourseModal }) {
       department,
     };
 
-    console.log(newCourse);
+    dispatch(createCourse(newCourse));
   };
 
   const handleLessonSelect = (e, index) => {

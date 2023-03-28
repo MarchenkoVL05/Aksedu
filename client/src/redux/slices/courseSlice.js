@@ -34,6 +34,21 @@ export const deleteCourse = createAsyncThunk("course/deleteCourse", async (id) =
   }
 });
 
+export const createCourse = createAsyncThunk("course/createCourse", async (data) => {
+  try {
+    const response = await axios.post("/course/create", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const customError = error.response ? error.response.data.message : "Network Error";
+    throw customError;
+  }
+});
+
 const courseSlice = createSlice({
   name: "course",
   initialState: {
@@ -67,6 +82,18 @@ const courseSlice = createSlice({
       state.status = "resolved";
     });
     builder.addCase(deleteCourse.rejected, (state, action) => {
+      state.status = "rejected";
+      state.error = action.error;
+    });
+    // Создать курс
+    builder.addCase(createCourse.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(createCourse.fulfilled, (state, action) => {
+      state.courses.push(action.payload);
+      state.status = "resolved";
+    });
+    builder.addCase(createCourse.rejected, (state, action) => {
       state.status = "rejected";
       state.error = action.error;
     });
