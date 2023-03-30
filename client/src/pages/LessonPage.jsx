@@ -11,7 +11,12 @@ function LessonPage() {
   const lessonId = useParams();
   const location = useLocation();
 
-  const courseId = location.state.data;
+  const userInfo = useSelector((state) => state.auth.userInfo);
+
+  const courseId = location.state?.data;
+  if (userInfo.role !== "ADMIN" && !courseId) {
+    window.history.back();
+  }
 
   useEffect(() => {
     dispatch(fetchOneLesson(lessonId.id));
