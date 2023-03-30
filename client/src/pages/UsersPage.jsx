@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import UsersList from "../components/UsersList";
 import TestResults from "../components/TestResults";
 import ProgressTable from "../components/ProgressTable";
+import TaskAnswersTable from "../components/TaskAnswersTable";
 
 function UsersPage() {
   return (
@@ -10,6 +11,7 @@ function UsersPage() {
       <UsersList />
       <TestResults />
       <ProgressTable />
+      <TaskAnswersTable />
     </>
   );
 }

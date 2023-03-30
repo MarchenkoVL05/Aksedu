@@ -65,12 +65,44 @@ export const removeProgress = createAsyncThunk("answer/removeProgress", async (i
   }
 });
 
+export const fetchTaskAnswers = createAsyncThunk("answer/fetchTaskAnswers", async () => {
+  try {
+    const response = await axios.get("/hardQuestion/all", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const customError = error.response ? error.response.data.message : "Network Error";
+    throw customError;
+  }
+});
+
+export const removeTaskAnswer = createAsyncThunk("answer/removeTaskAnswer", async (id) => {
+  try {
+    const response = await axios.delete("/hardQuestion/remove", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      data: {
+        id,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const customError = error.response ? error.response.data.message : "Network Error";
+    throw customError;
+  }
+});
+
 const answerSlice = createSlice({
   name: "answer",
   initialState: {
     testResults: [],
-    taskAnswers: [],
     testStatus: null,
+    taskAnswers: [],
     taskAnswersStatus: null,
     usersProgress: [],
     progressStatus: null,
@@ -129,6 +161,32 @@ const answerSlice = createSlice({
       })
       .addCase(removeProgress.rejected, (state, action) => {
         state.progressStatus = "rejected";
+        state.error = action.error;
+      })
+      // Получить ответы на задания
+      .addCase(fetchTaskAnswers.pending, (state) => {
+        state.taskAnswersStatus = "loading";
+      })
+      .addCase(fetchTaskAnswers.fulfilled, (state, action) => {
+        state.taskAnswersStatus = "resolved";
+        state.taskAnswers = action.payload;
+      })
+      .addCase(fetchTaskAnswers.rejected, (state, action) => {
+        state.taskAnswersStatus = "rejected";
+        state.error = action.error;
+      })
+      // Удалить ответ на задание
+      .addCase(removeTaskAnswer.pending, (state) => {
+        state.taskAnswersStatus = "loading";
+      })
+      .addCase(removeTaskAnswer.fulfilled, (state, action) => {
+        state.taskAnswersStatus = "resolved";
+        state.taskAnswers = state.taskAnswers.filter((answer) => {
+          return answer._id !== action.payload._id;
+        });
+      })
+      .addCase(removeTaskAnswer.rejected, (state, action) => {
+        state.taskAnswersStatus = "rejected";
         state.error = action.error;
       });
   },
