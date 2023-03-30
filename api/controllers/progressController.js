@@ -3,7 +3,7 @@ import ProgressModel from "../models/Progress.js";
 class progressController {
   static async getAll(req, res) {
     try {
-      const progressAll = await ProgressModel.find();
+      const progressAll = await ProgressModel.find().populate("userId").populate("courseId");
 
       return res.json(progressAll);
     } catch (error) {

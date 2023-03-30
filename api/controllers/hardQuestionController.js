@@ -6,7 +6,10 @@ import LessonModel from "../models/Lesson.js";
 class hardQuestionController {
   static async getAll(req, res) {
     try {
-      const hqAnswers = await HardQuestionAnswerModel.find();
+      const hqAnswers = await HardQuestionAnswerModel.find()
+        .populate("userId")
+        .populate("lessonId")
+        .populate("hardQuestionId");
 
       res.json(hqAnswers);
     } catch (error) {

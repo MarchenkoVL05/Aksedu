@@ -1,0 +1,52 @@
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 10px 50px;
+
+  h2 {
+    font-family: "Open Sans";
+    font-size: 28px;
+    font-weight: 500;
+  }
+  p {
+    &:hover {
+      cursor: pointer;
+      color: #c9c22b;
+    }
+  }
+}
+
+.toggleTable {
+  margin-top: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  color: #343434;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.grid {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  box-shadow: #64646f33 0px 7px 29px 0px;
+  div {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+  }
+}
+
+div.gridHead {
+  background: #3b4d61;
+  background: linear-gradient(174deg, #3b4d61 0%, #172e43 100%);
+  color: white;
+  font-size: 22px;
+  font-weight: 300;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
