@@ -13,7 +13,12 @@ class courseController {
       } else if (req.userInfo.role === "USER") {
         const userId = req.userInfo._id;
         // Вытаскиваем назначенные ученику курсы
-        const assignments = await AssignmentModel.find({ userId }).populate("department");
+        const assignments = await AssignmentModel.find({ userId }).populate({
+          path: "courses",
+          populate: {
+            path: "department",
+          },
+        });
         const courses = assignments[0].courses;
 
         return res.json(courses);

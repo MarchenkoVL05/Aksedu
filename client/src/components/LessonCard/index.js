@@ -7,7 +7,6 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import styles from "./LessonCard.module.scss";
 
 function LessonCard({ lesson, courseId }) {
-  console.log(courseId);
   const dispath = useDispatch();
 
   function formatDate(dateToFormat) {
