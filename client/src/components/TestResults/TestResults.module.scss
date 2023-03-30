@@ -17,8 +17,18 @@
   }
 }
 
+.toggleTable {
+  margin-top: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  color: #343434;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .grid {
-  margin-top: 20px;
+  margin-top: 15px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   box-shadow: #64646f33 0px 7px 29px 0px;
