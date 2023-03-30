@@ -1,9 +1,9 @@
 import { Puff } from "react-loader-spinner";
 import styles from "./Loader.module.scss";
 
-function Loader() {
+function Loader({ docflow }) {
   return (
-    <div className={styles.container}>
+    <div className={docflow ? styles.docflow : styles.container}>
       <Puff
         height="80"
         width="80"

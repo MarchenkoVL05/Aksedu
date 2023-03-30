@@ -12,7 +12,7 @@ import styles from "./LessonDetail.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion, faKeyboard } from "@fortawesome/free-solid-svg-icons";
 
-function LessonDetail({ lesson, error }) {
+function LessonDetail({ lesson, courseId, error }) {
   const [openCreateHQForm, setOpenCreateHQForm] = useState(false);
   const navigate = useNavigate();
   const userinfo = useSelector((state) => state.auth.userInfo);
@@ -85,8 +85,8 @@ function LessonDetail({ lesson, error }) {
             ) : (
               <TestQuestionCreateForm lessonId={lesson._id} />
             )}
-            <TestForLesson questions={lesson.testQuestions} />
-            <HqForLesson questions={lesson.hardQuestions} />
+            <TestForLesson questions={lesson.testQuestions} lessonId={lesson._id} courseId={courseId} />
+            <HqForLesson questions={lesson.hardQuestions} lessonId={lesson._id} courseId={courseId} />
           </>
         )}
       </div>

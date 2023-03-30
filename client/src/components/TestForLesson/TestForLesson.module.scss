@@ -20,6 +20,9 @@
 .question {
   max-width: 590px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .questionTitle {
@@ -31,13 +34,6 @@
   gap: 10px;
 }
 
-.optionsWrapper {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
 .option {
   max-width: 90%;
   word-wrap: break-word;
@@ -46,6 +42,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  input {
+    transform: scale(1.5);
+  }
 }
 
 .optionValue {
@@ -63,8 +62,38 @@
   box-shadow: #32325d40 0px 13px 27px -5px, #0000004d 0px 8px 16px -8px;
   border: none;
   cursor: pointer;
+  transition: 0.2s all;
+  &:hover {
+    background-color: #d1ad11;
+  }
   &:disabled {
     color: black;
     background: #e0e0e0;
   }
+}
+
+.successResult {
+  display: block;
+  margin-top: 25px;
+  font-family: "Open Sans";
+  font-size: 28px;
+  font-weight: 500;
+  color: #169b16;
+}
+
+.failResult {
+  display: block;
+  margin-top: 25px;
+  font-family: "Open Sans";
+  font-size: 28px;
+  font-weight: 500;
+  color: #9b1616;
+}
+
+.resultMessage {
+  display: block;
+  margin-top: 8px;
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: 600;
 }

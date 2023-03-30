@@ -1,8 +1,7 @@
 .card {
   position: relative;
   width: 100%;
-  height: min-content;
-  padding: 20px 30px;
+  padding: 20px 30px 50px;
   box-shadow: #0000003d 0px 3px 8px;
   border-radius: 10px;
   justify-self: center;
@@ -28,6 +27,9 @@
 }
 
 .date {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
   margin-top: 15px;
   color: #797979;
 }

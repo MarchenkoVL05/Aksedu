@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import styles from "./LessonCard.module.scss";
 
-function LessonCard({ lesson }) {
+function LessonCard({ lesson, courseId }) {
+  console.log(courseId);
   const dispath = useDispatch();
 
   function formatDate(dateToFormat) {
@@ -48,7 +49,7 @@ function LessonCard({ lesson }) {
         onClick={() => handleDeleteLesson(lesson._id)}
         style={{ color: "#df1616", position: "absolute", right: 10, top: 5, cursor: "pointer" }}
       />
-      <Link to={`/lesson/${lesson._id}`}>
+      <Link to={`/lesson/${lesson._id}`} state={{ data: courseId }}>
         {" "}
         <div className={styles.title}>{lesson.title}</div>
       </Link>

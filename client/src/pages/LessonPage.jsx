@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, useLocation, Navigate } from "react-router-dom";
 import { fetchOneLesson } from "../redux/slices/lessonSlice";
 import Header from "../components/Header";
 import LessonDetail from "../components/LessonDetail";
@@ -9,6 +9,9 @@ import Loader from "../components/Loader";
 function LessonPage() {
   const dispatch = useDispatch();
   const lessonId = useParams();
+  const location = useLocation();
+
+  const courseId = location.state.data;
 
   useEffect(() => {
     dispatch(fetchOneLesson(lessonId.id));
@@ -25,7 +28,7 @@ function LessonPage() {
         Object.keys(lesson).length !== 0 && (
           <>
             <Header />
-            <LessonDetail lesson={lesson} error={error} />
+            <LessonDetail lesson={lesson} courseId={courseId} error={error} />
           </>
         )
       )}

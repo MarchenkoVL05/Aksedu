@@ -33,7 +33,7 @@ function CoursePage() {
             <Loader />
           ) : (
             course.lessons.map((lesson) => {
-              return <LessonCard lesson={lesson} key={lesson._id} />;
+              return <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />;
             })
           )}
         </div>

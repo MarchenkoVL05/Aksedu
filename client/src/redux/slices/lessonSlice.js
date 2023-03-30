@@ -128,6 +128,36 @@ export const deleteHardQuestion = createAsyncThunk("lesson/deleteHardQuestion", 
   }
 });
 
+export const passLessonTest = createAsyncThunk("result/passLessonTest", async (data) => {
+  try {
+    const response = await axios.post("/testQuestion/save", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const customError = error.response ? error.response.data.message : "Network Error";
+    throw customError;
+  }
+});
+
+export const passLessonHq = createAsyncThunk("result/passLessonHq", async (data) => {
+  try {
+    const response = await axios.post("/hardQuestion/save", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const customError = error.response ? error.response.data.message : "Network Error";
+    throw customError;
+  }
+});
+
 const departmentSlice = createSlice({
   name: "lesson",
   initialState: {
@@ -135,6 +165,9 @@ const departmentSlice = createSlice({
     status: null,
     error: null,
     currentLesson: {},
+    result: {},
+    resultStatus: null,
+    hardQuestionStatus: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -154,6 +187,8 @@ const departmentSlice = createSlice({
       // Получить один урок
       .addCase(fetchOneLesson.pending, (state) => {
         state.status = "loading";
+        state.result = null;
+        state.hardQuestionStatus = null;
       })
       .addCase(fetchOneLesson.fulfilled, (state, action) => {
         state.status = "resolved";
@@ -239,6 +274,29 @@ const departmentSlice = createSlice({
       })
       .addCase(deleteHardQuestion.rejected, (state, action) => {
         state.status = "rejected";
+        state.error = action.error;
+      })
+      // Сдать тест
+      .addCase(passLessonTest.pending, (state) => {
+        state.resultStatus = "loading";
+      })
+      .addCase(passLessonTest.fulfilled, (state, action) => {
+        state.resultStatus = "resolved";
+        state.result = action.payload;
+      })
+      .addCase(passLessonTest.rejected, (state, action) => {
+        state.resultStatus = "rejected";
+        state.error = action.error;
+      })
+      // Сохранить ответ на задание
+      .addCase(passLessonHq.pending, (state) => {
+        state.hardQuestionStatus = "loading";
+      })
+      .addCase(passLessonHq.fulfilled, (state, action) => {
+        state.hardQuestionStatus = "resolved";
+      })
+      .addCase(passLessonHq.rejected, (state, action) => {
+        state.hardQuestionStatus = "rejected";
         state.error = action.error;
       });
   },

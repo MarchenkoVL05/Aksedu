@@ -127,6 +127,8 @@ class testQuestionController {
           const progressDoc = new ProgressModel({
             userId,
             courseId,
+            accessed: 2,
+            passedLessons: [lessonId],
           });
           await progressDoc.save();
 
