@@ -9,7 +9,7 @@ class testQuestionController {
   // Результаты тестирования
   static async getAll(req, res) {
     try {
-      const results = await TestResultModel.find();
+      const results = await TestResultModel.find().populate("userId").populate("lessonId");
 
       res.json(results);
     } catch (error) {
@@ -169,7 +169,7 @@ class testQuestionController {
     try {
       const resultId = req.body.id;
 
-      const removedResult = await TestResult.findByIdAndRemove(resultId);
+      const removedResult = await TestResultModel.findByIdAndRemove(resultId);
 
       return res.json(removedResult);
     } catch (error) {
