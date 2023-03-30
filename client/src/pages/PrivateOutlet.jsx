@@ -9,7 +9,9 @@ function PrivateOutlet() {
     return <Loader />;
   }
 
-  return userInfo && userInfo.role === "ADMIN" ? <Outlet /> : <Navigate to="/login" />;
+  console.log(userInfo.length);
+
+  return status == "resolved" && userInfo ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default PrivateOutlet;
