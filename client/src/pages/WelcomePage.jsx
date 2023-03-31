@@ -15,7 +15,7 @@ function WelcomePage() {
       if (!userInfo.approved) {
         return <WaitApprovePage />;
       } else {
-        return <HomePage />;
+        return <HomePage userInfo={userInfo} />;
       }
     case "rejected":
       return <Navigate to="/login" />;

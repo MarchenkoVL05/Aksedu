@@ -1,0 +1,70 @@
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.content {
+  animation-name: appear;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+
+.h1 {
+  font-family: "Open Sans";
+  font-weight: 700;
+  font-size: 60px;
+  color: #1c1c1c;
+  margin-top: 150px;
+}
+
+.h4 {
+  margin-top: 5px;
+  font-size: 30px;
+}
+
+.h5 {
+  margin-top: 15px;
+  font-size: 26px;
+  color: #3b4d61;
+}
+
+.link {
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-weight: 500;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: #edc30a;
+  box-shadow: #32325d40 0px 13px 27px -5px, #0000004d 0px 8px 16px -8px;
+}
+
+.explainWrapper {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.explain {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translate(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0);
+  }
+}

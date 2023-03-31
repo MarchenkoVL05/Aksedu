@@ -1,11 +1,12 @@
 import Header from "../components/Header";
 import AssignedCoursesList from "../components/AssignedCoursesList";
+import WelcomeAdmin from "../components/WelcomeAdmin";
 
-function HomePage() {
+function HomePage({ userInfo }) {
   return (
     <>
       <Header />
-      <AssignedCoursesList />
+      {userInfo.role === "ADMIN" ? <WelcomeAdmin /> : <AssignedCoursesList />}
     </>
   );
 }
