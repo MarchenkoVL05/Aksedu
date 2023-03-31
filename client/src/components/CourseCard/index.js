@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { confirmAlert } from "react-confirm-alert";
 import { deleteCourse } from "../../redux/slices/courseSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +9,8 @@ import styles from "./CourseCard.module.scss";
 
 function CourseCard({ course }) {
   const dispatch = useDispatch();
+
+  const userInfo = useSelector((state) => state.auth.userInfo);
 
   function formatDate(dateToFormat) {
     const date = new Date(dateToFormat);
@@ -41,16 +43,18 @@ function CourseCard({ course }) {
 
   return (
     <div className={styles.course} key={course._id}>
-      <Link to={`/course/${course._id}`}>
+      <Link to={`/course/${course._id}`} state={{ data: course._id }}>
         <div className={styles.courseTitle}>{course.title}</div>
       </Link>
       <div className={styles.department}>Отдел: {course.department.name}</div>
       <div className={styles.date}>Курс создан: {formatDate(course.createdAt)}</div>
-      <FontAwesomeIcon
-        icon={faEraser}
-        onClick={() => handleRemoveCourse(course._id)}
-        style={{ cursor: "pointer", position: "absolute", top: "20px", right: "20px" }}
-      />
+      {userInfo.role === "ADMIN" && (
+        <FontAwesomeIcon
+          icon={faEraser}
+          onClick={() => handleRemoveCourse(course._id)}
+          style={{ cursor: "pointer", position: "absolute", top: "20px", right: "20px" }}
+        />
+      )}
     </div>
   );
 }

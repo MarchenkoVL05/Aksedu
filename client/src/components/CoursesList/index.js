@@ -14,6 +14,8 @@ function CoursesList() {
     dispatch(fetchAllCourses());
   }, []);
 
+  const userInfo = useSelector((state) => state.auth.userInfo);
+
   const courses = useSelector((state) => state.course.courses);
   const status = useSelector((state) => state.course.status);
 
@@ -24,9 +26,11 @@ function CoursesList() {
         <Loader />
       ) : (
         <>
-          <button onClick={() => setCreateCourseModal(!createCourseModal)} className={styles.makeCourseBtn}>
-            Сформировать курс
-          </button>
+          {userInfo.role === "ADMIN" && (
+            <button onClick={() => setCreateCourseModal(!createCourseModal)} className={styles.makeCourseBtn}>
+              Сформировать курс
+            </button>
+          )}
           {createCourseModal && <CreateCourseForm setCreateCourseModal={setCreateCourseModal} />}
           <ul className={styles.coursesList}>
             {courses.map((course) => {

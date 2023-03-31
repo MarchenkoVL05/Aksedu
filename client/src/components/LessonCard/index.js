@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { confirmAlert } from "react-confirm-alert";
 import { deleteLesson } from "../../redux/slices/lessonSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,8 @@ import styles from "./LessonCard.module.scss";
 
 function LessonCard({ lesson, courseId }) {
   const dispath = useDispatch();
+
+  const userInfo = useSelector((state) => state.auth.userInfo);
 
   function formatDate(dateToFormat) {
     const date = new Date(dateToFormat);
@@ -43,11 +45,13 @@ function LessonCard({ lesson, courseId }) {
 
   return (
     <div className={styles.card}>
-      <FontAwesomeIcon
-        icon={faXmark}
-        onClick={() => handleDeleteLesson(lesson._id)}
-        style={{ color: "#df1616", position: "absolute", right: 10, top: 5, cursor: "pointer" }}
-      />
+      {userInfo.role === "ADMIN" && (
+        <FontAwesomeIcon
+          icon={faXmark}
+          onClick={() => handleDeleteLesson(lesson._id)}
+          style={{ color: "#df1616", position: "absolute", right: 10, top: 5, cursor: "pointer" }}
+        />
+      )}
       <Link to={`/lesson/${lesson._id}`} state={{ data: courseId }}>
         {" "}
         <div className={styles.title}>{lesson.title}</div>
