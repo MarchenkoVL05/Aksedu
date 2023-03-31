@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 // компоненты
 import PrivateOutlet from "./pages/PrivateOutlet";
+import AdminOutlet from "./pages/AdminOutlet";
 import WelcomePage from "./pages/WelcomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import LoginPage from "./pages/LoginPage";
@@ -22,11 +23,13 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route element={<PrivateOutlet />}>
-        <Route path="/courses" element={<CoursesPage />} />
         <Route path="/course/:id" element={<CoursePage />} />
+        <Route path="/lesson/:id" element={<LessonPage />} />
+      </Route>
+      <Route element={<AdminOutlet />}>
+        <Route path="/courses" element={<CoursesPage />} />
         <Route path="/departments" element={<DepartmentsPage />} />
         <Route path="/lessons" element={<LessonsPage />} />
-        <Route path="/lesson/:id" element={<LessonPage />} />
         <Route path="/users" element={<UsersPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />

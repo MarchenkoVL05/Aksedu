@@ -43,7 +43,7 @@ function CoursePage() {
         <div className="lessons">
           {!status || status === "loading" ? (
             <Loader />
-          ) : (
+          ) : userInfo.role !== "ADMIN" ? (
             course.lessons.map((lesson, lessonIndex) =>
               lessonIndex + 1 <= accessedLessons ? (
                 <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />
@@ -51,6 +51,8 @@ function CoursePage() {
                 <DummyLessonCard lesson={lesson} key={lesson._id} />
               )
             )
+          ) : (
+            course.lessons.map((lesson) => <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />)
           )}
         </div>
       </div>
