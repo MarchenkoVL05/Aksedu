@@ -100,7 +100,7 @@ const courseSlice = createSlice({
     });
     builder.addCase(fetchOneCourse.rejected, (state, action) => {
       state.status = "rejected";
-      state.currentCourseStatus = action.error;
+      state.currentCourseStatus = "rejected";
     });
     // Удалить курс
     builder.addCase(deleteCourse.pending, (state) => {

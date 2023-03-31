@@ -39,18 +39,18 @@ class courseController {
       const course = await CourseModel.findOne({ _id: courseId }).populate("lessons");
       const progress = await ProgressModel.find({ courseId, userId });
 
+      if (!course) {
+        return res.status(404).json({
+          message: "Курс не найден",
+        });
+      }
+
       if (progress.length == 0) {
         let accessedLessonsCount = 1;
         return res.json({ course, accessedLessonsCount });
       }
 
       const accessedLessonsCount = progress[0].accessed;
-
-      if (!course) {
-        return res.json({
-          message: "Такой курс не найден",
-        });
-      }
 
       return res.json({ course, accessedLessonsCount });
     } catch (error) {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Navigate } from "react-router-dom";
 import DummyLessonCard from "../components/DummyLessonCard";
 import Header from "../components/Header";
 import LessonCard from "../components/LessonCard";
@@ -41,19 +41,17 @@ function CoursePage() {
         )}
         {openAssignModal && <AssignCourseModal setOpenAssignModal={setOpenAssignModal} courseId={course._id} />}
         <div className="lessons">
-          {!status || status === "loading" ? (
-            <Loader />
-          ) : userInfo.role !== "ADMIN" ? (
-            course.lessons.map((lesson, lessonIndex) =>
-              lessonIndex + 1 <= accessedLessons ? (
-                <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />
-              ) : (
-                <DummyLessonCard lesson={lesson} key={lesson._id} />
+          {status === "resolved" && course.lessons && userInfo.role !== "ADMIN"
+            ? course.lessons.map((lesson, lessonIndex) =>
+                lessonIndex + 1 <= accessedLessons ? (
+                  <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />
+                ) : (
+                  <DummyLessonCard lesson={lesson} key={lesson._id} />
+                )
               )
-            )
-          ) : (
-            course.lessons.map((lesson) => <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />)
-          )}
+            : course.lessons?.map((lesson) => <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />)}
+
+          {status == "rejected" && <Navigate to="/404" />}
         </div>
       </div>
     </>
