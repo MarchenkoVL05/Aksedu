@@ -1,0 +1,32 @@
+.card {
+  position: relative;
+  width: 100%;
+  padding: 20px 30px 50px;
+  box-shadow: #0000003d 0px 3px 8px;
+  border-radius: 10px;
+  justify-self: center;
+  opacity: 0.5;
+}
+
+.title {
+  font-family: "Open Sans";
+  font-size: 28px;
+  font-weight: 600;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 15px;
+  transition: 0.2s all;
+}
+
+.content {
+  margin-top: 15px;
+  font-size: 22px;
+  color: #585858;
+}
+
+.date {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  margin-top: 15px;
+  color: #797979;
+}

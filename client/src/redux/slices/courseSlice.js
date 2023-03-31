@@ -71,6 +71,7 @@ const courseSlice = createSlice({
     error: null,
     status: null,
     currentCourse: {},
+    accessed: null,
     currentCourseStatus: null,
   },
   reducers: {},
@@ -90,9 +91,11 @@ const courseSlice = createSlice({
     // Загрузить один курс
     builder.addCase(fetchOneCourse.pending, (state) => {
       state.currentCourseStatus = "loading";
+      state.accessed = null;
     });
     builder.addCase(fetchOneCourse.fulfilled, (state, action) => {
-      state.currentCourse = action.payload;
+      state.currentCourse = action.payload.course;
+      state.accessed = action.payload.accessedLessonsCount;
       state.currentCourseStatus = "resolved";
     });
     builder.addCase(fetchOneCourse.rejected, (state, action) => {

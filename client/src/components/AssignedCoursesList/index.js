@@ -17,7 +17,7 @@ function AssignedCoursesList() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Список назначенных</h1>
+      <h1 className={styles.title}>Список назначенных курсов</h1>
       {status == "loading" ? (
         <Loader />
       ) : (

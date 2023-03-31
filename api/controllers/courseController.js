@@ -34,8 +34,17 @@ class courseController {
   static async getOne(req, res) {
     try {
       const courseId = req.params.id;
+      const userId = req.userInfo._id;
 
       const course = await CourseModel.findOne({ _id: courseId }).populate("lessons");
+      const progress = await ProgressModel.find({ courseId, userId });
+
+      if (progress.length == 0) {
+        let accessedLessonsCount = 1;
+        return res.json({ course, accessedLessonsCount });
+      }
+
+      const accessedLessonsCount = progress[0].accessed;
 
       if (!course) {
         return res.json({
@@ -43,7 +52,7 @@ class courseController {
         });
       }
 
-      return res.json(course);
+      return res.json({ course, accessedLessonsCount });
     } catch (error) {
       console.log(error);
       res.json({

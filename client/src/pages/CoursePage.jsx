@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
+import DummyLessonCard from "../components/DummyLessonCard";
 import Header from "../components/Header";
 import LessonCard from "../components/LessonCard";
 import Loader from "../components/Loader";
@@ -26,6 +27,7 @@ function CoursePage() {
 
   const course = useSelector((state) => state.course.currentCourse);
   const status = useSelector((state) => state.course.currentCourseStatus);
+  const accessedLessons = useSelector((state) => state.course.accessed);
 
   return (
     <>
@@ -42,9 +44,13 @@ function CoursePage() {
           {!status || status === "loading" ? (
             <Loader />
           ) : (
-            course.lessons.map((lesson) => {
-              return <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />;
-            })
+            course.lessons.map((lesson, lessonIndex) =>
+              lessonIndex + 1 <= accessedLessons ? (
+                <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />
+              ) : (
+                <DummyLessonCard lesson={lesson} key={lesson._id} />
+              )
+            )
           )}
         </div>
       </div>

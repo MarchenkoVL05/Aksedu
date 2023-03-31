@@ -9,8 +9,6 @@ function PrivateOutlet() {
     return <Loader />;
   }
 
-  console.log(userInfo.length);
-
   return status == "resolved" && userInfo ? <Outlet /> : <Navigate to="/login" />;
 }
 
