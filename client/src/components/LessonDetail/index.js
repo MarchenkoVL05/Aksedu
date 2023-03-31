@@ -65,7 +65,7 @@ function LessonDetail({ lesson, courseId, error }) {
         <h1 className={styles.title}>{lesson.title}</h1>
         <p className={styles.content}>{lesson.content}</p>
         <span className={styles.date}>Урок создан: {formatDate(lesson.createdAt)}</span>
-        <button className={styles.back} onClick={() => navigate("/lessons")}>
+        <button className={styles.back} onClick={() => window.history.back()}>
           Вернуться к списку уроков
         </button>
         {userinfo && userinfo.role === "ADMIN" && (
@@ -85,10 +85,10 @@ function LessonDetail({ lesson, courseId, error }) {
             ) : (
               <TestQuestionCreateForm lessonId={lesson._id} />
             )}
-            <TestForLesson questions={lesson.testQuestions} lessonId={lesson._id} courseId={courseId} />
-            <HqForLesson questions={lesson.hardQuestions} lessonId={lesson._id} courseId={courseId} />
           </>
         )}
+        <TestForLesson questions={lesson.testQuestions} lessonId={lesson._id} courseId={courseId} />
+        <HqForLesson questions={lesson.hardQuestions} lessonId={lesson._id} courseId={courseId} />
       </div>
       {error && <ErrorBox message={error.message} />}
     </>
