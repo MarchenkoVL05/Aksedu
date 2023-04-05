@@ -28,7 +28,7 @@ function LessonDetail({ lesson, courseId, error }) {
       title: "video",
       sources: [
         {
-          src: `http://localhost:4444${lesson.videoUrl}`,
+          src: `http://192.168.0.43:4444${lesson.videoUrl}`,
           type: "video/mp4",
         },
       ],

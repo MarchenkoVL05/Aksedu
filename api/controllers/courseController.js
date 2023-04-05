@@ -55,7 +55,7 @@ class courseController {
       return res.json({ course, accessedLessonsCount });
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось открыть курс",
       });
     }
