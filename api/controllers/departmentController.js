@@ -9,7 +9,7 @@ class departmentController {
       return res.json(departments);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось загрузить список отделов",
       });
     }
@@ -22,7 +22,7 @@ class departmentController {
       const existedDepartment = await DepartmentModel.findOne({ name: newDepartmentName });
 
       if (existedDepartment) {
-        return res.json({
+        return res.status(400).json({
           message: "Такой отдел уже существует",
         });
       }
@@ -36,7 +36,7 @@ class departmentController {
       return res.json(newDepartment);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось создать отдел",
       });
     }
@@ -53,7 +53,7 @@ class departmentController {
       return res.json(removedDepartment);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось удалить отдел",
       });
     }

@@ -8,7 +8,7 @@ class progressController {
       return res.json(progressAll);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось загрусить прогресс учеников",
       });
     }
@@ -23,7 +23,7 @@ class progressController {
       return res.json(removedProgress);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось загрусить прогресс учеников",
       });
     }

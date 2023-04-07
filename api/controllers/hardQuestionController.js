@@ -27,14 +27,14 @@ class hardQuestionController {
 
       const existedLesson = await LessonModel.findOne({ _id: lessonId });
       if (existedLesson.length == 0) {
-        return res.json({
+        return res.status(400).json({
           message: "Урок не найден",
         });
       }
 
       // Пока что так, дабы не заморачиваться с несколькими формами на странице урока
       if (existedLesson.hardQuestions.length !== 0) {
-        return res.json({
+        return res.status(400).json({
           message: "Вопрос уже создан",
         });
       }
@@ -50,7 +50,7 @@ class hardQuestionController {
       return res.json(newHQ);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось создать сложный вопрос",
       });
     }
@@ -73,7 +73,7 @@ class hardQuestionController {
       return res.json(removedHq);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось удалить сложный вопрос",
       });
     }
@@ -98,7 +98,7 @@ class hardQuestionController {
       return res.json(savedHQAnswer);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось сохранить ответ",
       });
     }
@@ -113,7 +113,7 @@ class hardQuestionController {
       return res.json(removedHqAnswer);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось удалить ответ",
       });
     }

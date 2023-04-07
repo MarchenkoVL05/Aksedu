@@ -25,7 +25,7 @@ class courseController {
       }
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось загрузить список курсов",
       });
     }
@@ -79,7 +79,7 @@ class courseController {
       return res.json(populatedCourse);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось создать курс",
       });
     }
@@ -104,7 +104,7 @@ class courseController {
       return res.json(removedCourse);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось удалить курс",
       });
     }
@@ -140,7 +140,7 @@ class courseController {
       }
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось назначить курс",
       });
     }
@@ -168,7 +168,7 @@ class courseController {
       return res.json(populatedAssignment);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось снять с назначения",
       });
     }

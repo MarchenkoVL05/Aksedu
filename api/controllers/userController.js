@@ -60,7 +60,7 @@ class userController {
       });
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось зарегестрироваться",
       });
     }
@@ -143,7 +143,7 @@ class userController {
       return res.json(users);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось загрузить список пользователей",
       });
     }
@@ -157,7 +157,7 @@ class userController {
       return res.json(users);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось загрузить список пользователей",
       });
     }

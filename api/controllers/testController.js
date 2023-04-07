@@ -13,7 +13,7 @@ class testQuestionController {
 
       res.json(results);
     } catch (error) {
-      console.log(error);
+      console.status(500).log(error);
       res.json({
         message: "Не удалось загрузить результаты учеников",
       });
@@ -28,7 +28,7 @@ class testQuestionController {
 
       const existedLesson = await LessonModel.find({ _id: lessonId });
       if (existedLesson.length == 0) {
-        return res.json({
+        return res.status(400).json({
           message: "Урок не найден",
         });
       }
@@ -75,7 +75,7 @@ class testQuestionController {
       return res.status(200).json(removedQuestion);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось удалить вопрос",
       });
     }
@@ -159,7 +159,7 @@ class testQuestionController {
       return res.json(userTestResult);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось сохранить результат тестирования",
       });
     }
@@ -174,7 +174,7 @@ class testQuestionController {
       return res.json(removedResult);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось удалить результат тестирования",
       });
     }

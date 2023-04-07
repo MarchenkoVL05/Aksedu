@@ -23,7 +23,7 @@ class lessonController {
       return res.json(lessons);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось загрузить список уроков",
       });
     }
@@ -121,7 +121,7 @@ class lessonController {
       return res.json(removedLesson);
     } catch (error) {
       console.log(error);
-      res.json({
+      res.status(500).json({
         message: "Не удалось удалить урок",
       });
     }
