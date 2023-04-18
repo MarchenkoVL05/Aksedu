@@ -39,19 +39,20 @@ function CoursePage() {
             Назначить к прохождению
           </button>
         )}
-        {openAssignModal && <AssignCourseModal setOpenAssignModal={setOpenAssignModal} courseId={course._id} />}
+        {openAssignModal && <AssignCourseModal setOpenAssignModal={setOpenAssignModal} courseId={course?._id} />}
         <div className="lessons">
-          {status === "resolved" && course.lessons && userInfo.role !== "ADMIN"
+          {status === "loading" && <Loader />}
+          {status === "resolved" && course?.lessons && userInfo.role !== "ADMIN"
             ? course.lessons.map((lesson, lessonIndex) =>
                 lessonIndex + 1 <= accessedLessons ? (
-                  <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />
+                  <LessonCard lesson={lesson} courseId={course?._id} key={lesson._id} />
                 ) : (
                   <DummyLessonCard lesson={lesson} key={lesson._id} />
                 )
               )
-            : course.lessons?.map((lesson) => <LessonCard lesson={lesson} courseId={course._id} key={lesson._id} />)}
+            : course?.lessons?.map((lesson) => <LessonCard lesson={lesson} courseId={course?._id} key={lesson._id} />)}
 
-          {status == "rejected" && <Navigate to="/404" />}
+          {status === "rejected" && <Navigate to="/404" />}
         </div>
       </div>
     </>

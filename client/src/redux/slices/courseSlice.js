@@ -91,6 +91,7 @@ const courseSlice = createSlice({
     // Загрузить один курс
     builder.addCase(fetchOneCourse.pending, (state) => {
       state.currentCourseStatus = "loading";
+      state.currentCourse = null;
       state.accessed = null;
     });
     builder.addCase(fetchOneCourse.fulfilled, (state, action) => {

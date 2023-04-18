@@ -15,7 +15,7 @@ app.use("/uploads", express.static("uploads"));
 
 app.use("/api", router);
 
-const PORT = process.env.PORT || 4444;
+const PORT = process.env.PORT || 80;
 
 mongoose.set("strictQuery", false);
 
